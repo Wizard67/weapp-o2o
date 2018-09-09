@@ -1,6 +1,6 @@
 <template>
   <div class="container" @click="clickHandle('test click', $event)">
-
+    <van-button>测试</van-button>
     <div class="userinfo" @click="bindViewTap">
       <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
       <div class="userinfo-nickname">
