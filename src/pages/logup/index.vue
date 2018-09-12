@@ -29,7 +29,9 @@
         :error="false"
       />
     </van-cell-group>
-    <van-button size="large">注册</van-button>
+    <van-button size="large">
+      <navigator url="/pages/address/main">注册</navigator>
+    </van-button>
     <navigator url="/pages/login/main">登录</navigator>
   </div>
 </template>
