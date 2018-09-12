@@ -44,7 +44,9 @@
         </van-cell-group>
       </van-tab>
     </van-tabs>
-    <van-button size="large">登录</van-button>
+    <navigator url="/pages/index/main">
+      <van-button size="large">登录</van-button>
+    </navigator>
     <navigator url="/pages/logup/main">注册</navigator>
   </div>
 </template>

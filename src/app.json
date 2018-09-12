@@ -2,12 +2,35 @@
   "pages": [
     "pages/login/main",
     "pages/logup/main",
-    "pages/counter/main"
+    "pages/address/main",
+    "pages/counter/main",
+    "pages/index/main",
+    "pages/recommend/main",
+    "pages/cart/main",
+    "pages/user/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/main",
+      "text": "首页"
+    },
+    {
+      "pagePath": "pages/recommend/main",
+      "text": "推荐"
+    },
+    {
+      "pagePath": "pages/cart/main",
+      "text": "购物车"
+    },
+    {
+      "pagePath": "pages/user/main",
+      "text": "个人中心"
+    }]
   }
 }
