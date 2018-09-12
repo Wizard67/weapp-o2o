@@ -3,7 +3,6 @@
     "pages/login/main",
     "pages/logup/main",
     "pages/address/main",
-    "pages/counter/main",
     "pages/index/main",
     "pages/recommend/main",
     "pages/cart/main",
