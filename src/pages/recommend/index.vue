@@ -1,48 +1,100 @@
 <template>
   <div class="container">
-    <van-tabs :active="0">
-      <van-tab title="热门">
-        <scroll-view scroll-y style="width: 100%;">
-        <van-card
-          title="标题"
-          desc="描述"  
-          num="2"
-          price="2.00"
-          :thumb="imageURL"
-          v-for="i in 5"
-          :key="i"
-        >
-          <view slot="footer">
-            <van-button size="mini">按钮</van-button>
-            <van-button size="mini">按钮</van-button>
-          </view>
-        </van-card>
-        </scroll-view>
-      </van-tab>
-      <van-tab title="水果">内容 2</van-tab>
-      <van-tab title="土特产">内容 3</van-tab>
-      <van-tab title="生鲜">内容 4</van-tab>
-      <van-tab title="票务">内容 5</van-tab>
+    <van-tabs id="tabs" :active="0" @change="onTabsChange">
+      <van-tab title="热门"></van-tab>
+      <van-tab title="水果"></van-tab>
+      <van-tab title="土特产"></van-tab>
+      <van-tab title="生鲜"></van-tab>
+      <van-tab title="票务"></van-tab>
     </van-tabs>
+
+    <scroll-view
+      :style="{height: scrollViewHeight+'px'}"
+      lower-threshold="50"
+      @scrolltolower="handleScrollToBottom"
+      scroll-y
+    >
+      <van-card
+        v-for="item in lists"
+        title="原膳翔金鲳鱼340g"
+        desc="★★★★★ ￥32.50"
+        num="2"
+        price="2.00"
+        :thumb="item.url"
+        :key="item"
+      >
+        <view class="text-helper" slot="footer">
+          仓山万达广场5.9km
+        </view>
+      </van-card>
+    </scroll-view>
   </div>
 </template>
 
 <script>
+const getPageHeight = callback => {
+  wx.getSystemInfo({success(res) {callback(res.windowHeight)}})
+}
+const getNodeRectHeight = (nodeId, callback) => {
+  wx.createSelectorQuery().select(nodeId).boundingClientRect(rect => callback(rect)).exec()
+}
+
 export default {
   data () {
     return {
-      imageURL: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+      pageHeight: '',
+      tabsHeight: '',
+
+      lists: [
+        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 1 },
+        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 2 },
+        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 3 },
+        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 4 },
+        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 5 },
+        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 6 },
+        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 7 },
+      ]
     }
   },
 
   components: {
   },
 
-  methods: {
+  computed: {
+    scrollViewHeight() {
+      return this.pageHeight - this.tabsHeight
+    }
+  },
 
+  methods: {
+    handleScrollToBottom (e) {
+      wx.showToast({
+        title: `加载更多...`,
+        icon: 'none'
+      })
+      this.lists.push(
+        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 1 },
+        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 2 },
+        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 3 }
+      )
+    },
+
+    onTabsChange(e) {
+      this.active = e.mp.detail.index
+      wx.showToast({
+        title: `切换到 ${e.mp.detail.title}`,
+        icon: 'none'
+      })
+    }
   },
 
   created () {
+  },
+
+  onReady () {
+    // set scroll-view height
+    getPageHeight(height => this.pageHeight = height)
+    getNodeRectHeight('#tabs', rect => this.pickerHeight = rect.height)
   }
 }
 </script>
