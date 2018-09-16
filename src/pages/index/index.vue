@@ -24,19 +24,23 @@
       @scrolltolower="handleScrollToBottom"
       scroll-y
     >
-      <van-card
+      <navigator
         v-for="item in lists"
-        title="原膳翔金鲳鱼340g"
-        desc="★★★★★ ￥32.50"
-        num="2"
-        price="2.00"
-        :thumb="item.url"
+        url="/pages/detail/main"
         :key="item"
       >
+        <van-card
+          title="原膳翔金鲳鱼340g"
+          desc="★★★★★ ￥32.50"
+          num="2"
+          price="2.00"
+          :thumb="item.url"
+        >
         <view class="text-helper" slot="footer">
           仓山万达广场5.9km
         </view>
       </van-card>
+      </navigator>
     </scroll-view>
   </div>
 </template>
