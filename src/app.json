@@ -6,10 +6,10 @@
     "pages/index/main",
     "pages/recommend/main",
     "pages/cart/main",
-    "pages/user/main"
+    "pages/user/main",
+    "pages/detail/main"
   ],
   "window": {
-    "backgroundTextStyle": "light",
     "backgroundColor": "#828282",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
