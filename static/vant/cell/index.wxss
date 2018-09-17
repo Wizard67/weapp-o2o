@@ -96,7 +96,7 @@
 
 .van-cell__value {
   overflow: hidden;
-  text-align: left;
+  text-align: right;
   vertical-align: middle
 }
 
