@@ -7,7 +7,8 @@
     "pages/recommend/main",
     "pages/cart/main",
     "pages/user/main",
-    "pages/detail/main"
+    "pages/detail/main",
+    "pages/order/main"
   ],
   "window": {
     "backgroundColor": "#828282",
