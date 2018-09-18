@@ -36,6 +36,9 @@
           </van-cell>
           <van-cell value="小计 ￥200" />
         </van-cell-group>
+        <navigator url="/pages/order/main">
+          <van-button type="default" block>确定</van-button>
+        </navigator>
       </view>
     </van-popup>
   </div>
