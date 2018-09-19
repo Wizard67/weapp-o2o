@@ -5,7 +5,6 @@
     "pages/address/main",
     "pages/index/main",
     "pages/recommend/main",
-    "pages/cart/main",
     "pages/user/main",
     "pages/detail/main",
     "pages/order/main"
@@ -25,10 +24,6 @@
     {
       "pagePath": "pages/recommend/main",
       "text": "推荐"
-    },
-    {
-      "pagePath": "pages/cart/main",
-      "text": "购物车"
     },
     {
       "pagePath": "pages/user/main",
