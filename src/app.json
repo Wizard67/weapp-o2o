@@ -7,7 +7,8 @@
     "pages/recommend/main",
     "pages/user/main",
     "pages/detail/main",
-    "pages/order/main"
+    "pages/order/main",
+    "pages/addressLists/main"
   ],
   "window": {
     "backgroundColor": "#828282",
