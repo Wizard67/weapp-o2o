@@ -8,7 +8,8 @@
     "pages/user/main",
     "pages/detail/main",
     "pages/order/main",
-    "pages/addressLists/main"
+    "pages/addressLists/main",
+    "pages/addressNew/main"
   ],
   "window": {
     "backgroundColor": "#828282",
