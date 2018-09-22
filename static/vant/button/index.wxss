@@ -98,10 +98,10 @@
 
 .van-button--mini {
   display: inline-block;
-  padding: 0 5px;
   min-width: 50px;
-  height: 22px;
-  line-height: 20px;
+  height: 2em;
+  padding: 0 .5em;
+  line-height: 2em;
   font-size: 10px
 }
 
