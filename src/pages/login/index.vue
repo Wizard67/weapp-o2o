@@ -1,55 +1,69 @@
 <template>
   <div class="container">
-    <van-tabs @change="onTabsChange">
-      <van-tab title="密码登录">
-        <van-cell-group>
-          <van-field
-            placeholder="请输入手机号"
-            :value="normal.phone"
-            :maxlength="11"
-            :error="isNormalPhoneError"
-            @input="onNormalPhoneChange"
-            @blur="checkNormalPhoneValue"
-          />
-          <van-field
-            type="password"
-            placeholder="请输入密码"
-            :value="normal.password"
-            :error="isNormalPasswordError"
-            @input="onNormalPasswordChange"
-            @blur="checkNormalPasswordValue"
-          />
-        </van-cell-group>
-      </van-tab>
+    <div class="logo">Logo</div>
+    <van-row>
+      <van-col span="20" offset="2">
+        <div class="panel">
+          <van-tabs class="fix-tabs" @change="onTabsChange">
+              <van-tab title="密码登录">
+                <van-cell-group>
+                  <van-field
+                    placeholder="请输入手机号"
+                    :value="normal.phone"
+                    :maxlength="11"
+                    :error="isNormalPhoneError"
+                    @input="onNormalPhoneChange"
+                    @blur="checkNormalPhoneValue"
+                  />
+                  <van-field
+                    type="password"
+                    placeholder="请输入密码"
+                    :value="normal.password"
+                    :error="isNormalPasswordError"
+                    @input="onNormalPasswordChange"
+                    @blur="checkNormalPasswordValue"
+                  />
+                </van-cell-group>
+              </van-tab>
 
-      <van-tab title="短信登录">
-        <van-cell-group>
-          <van-field
-            placeholder="请输入手机号"
-            :value="message.phone"
-            :error="isMessagePhoneError"
-            @input="onMessagePhoneChange"
-            @blur="checkMessagePhoneValue"
-          />
-          <van-field
-            placeholder="请输入验证码"
-            :value="message.code"
-            :error="isMessageCodeError"
-            @input="onMessageCodeChange"
-            @blur="checkMessageCodeValue"
-            use-button-slot
-          >
-            <van-button
-             slot="button" size="mini" type="primary"
-             @click="onCodeSend"
-             :disabled="isCodeDesabled"
-            >{{ codeText }}</van-button>
-          </van-field>
-        </van-cell-group>
-      </van-tab>
-    </van-tabs>
-    <van-button size="large" @click="onSubmit">登录</van-button>
-    <navigator class="text-helper" url="/pages/logup/main">注册</navigator>
+              <van-tab title="短信登录">
+                <van-cell-group>
+                  <van-field
+                    placeholder="请输入手机号"
+                    :value="message.phone"
+                    :error="isMessagePhoneError"
+                    @input="onMessagePhoneChange"
+                    @blur="checkMessagePhoneValue"
+                  />
+                  <van-field
+                    placeholder="请输入验证码"
+                    :value="message.code"
+                    :error="isMessageCodeError"
+                    @input="onMessageCodeChange"
+                    @blur="checkMessageCodeValue"
+                    use-button-slot
+                  >
+                    <van-button
+                    type="danger" slot="button" size="mini"
+                    @click="onCodeSend"
+                    :disabled="isCodeDesabled"
+                    >{{ codeText }}</van-button>
+                  </van-field>
+                </van-cell-group>
+              </van-tab>
+          </van-tabs>
+        </div>
+      </van-col>
+      <van-col span="18" offset="3">
+        <div class="button">
+          <van-button type="danger" size="large" @click="onSubmit">登录</van-button>
+          <div class="helper">
+            <div class="text-helper">忘记密码？</div>
+            <navigator class="text-helper" url="/pages/logup/main">立即注册</navigator>
+          </div>
+        </div>
+      </van-col>
+    </van-row>
   </div>
 </template>
 
@@ -178,10 +192,35 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 320rpx;
+  color: white;
+  background-color: #f44;
+  font-size: 64rpx;
+}
+.panel {
+  position: relative;
+  top: -60rpx;
+  padding: 40rpx 40rpx 60rpx 40rpx;
+  box-shadow: 0 0 10px 1px rgb(173, 173, 173);
+  background-color: white;
+}
+.button {
+  position: relative;
+  top: -100rpx;
+}
+.helper {
+  display: flex;
+  justify-content: space-between;
+}
+
 .text-helper {
   display: inline-block;
-  padding: 12px;
-  color: rgb(102, 102, 102);
+  padding: 12px 0;
+  color: #f44;
   font-size: 14px;
 }
 </style>
