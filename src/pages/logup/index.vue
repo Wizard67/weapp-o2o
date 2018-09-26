@@ -1,40 +1,54 @@
 <template>
   <div class="container">
-    <van-cell-group>
-      <van-field
-        placeholder="请输入手机号"
-        :value="form.phone"
-        :maxlength="11"
-        :error="isPhoneError"
-        @input="onPhoneChange"
-        @blur="checkPhoneValue"
-      />
-      <van-field
-        placeholder="请输入验证码"
-        :value="form.code"
-        :error="isCodeError"
-        @input="onCodeChange"
-        @blur="checkCodeValue"
-        use-button-slot
-      >
-        <van-button
-          slot="button" size="mini" type="primary"
-          :disabled="isCodeDesabled"
-          @click="onCodeSend"
-        >{{ codeText }}</van-button>
-      </van-field>
+    <div class="logo">Logo</div>
+    <van-row>
+      <van-col span="20" offset="2">
+        <div class="panel">
+          <van-cell-group>
+            <van-field
+              placeholder="请输入手机号"
+              :value="form.phone"
+              :maxlength="11"
+              :error="isPhoneError"
+              @input="onPhoneChange"
+              @blur="checkPhoneValue"
+            />
+            <van-field
+              placeholder="请输入验证码"
+              :value="form.code"
+              :error="isCodeError"
+              @input="onCodeChange"
+              @blur="checkCodeValue"
+              use-button-slot
+            >
+              <van-button
+                type="danger" slot="button" size="mini"
+                @click="onCodeSend"
+                :disabled="isCodeDesabled"
+              >{{ codeText }}</van-button>
+            </van-field>
 
-      <van-field
-        type="password"
-        placeholder="请输入密码"
-        :value="form.password"
-        :error="isPasswordError"
-        @input="onPasswordChange"
-        @blur="checkPasswordValue"
-      />
-    </van-cell-group>
-    <van-button size="large" @click="onSubmit">注册</van-button>
-    <navigator class="text-helper" url="/pages/login/main">登录</navigator>
+            <van-field
+              type="password"
+              placeholder="请输入密码"
+              :value="form.password"
+              :error="isPasswordError"
+              @input="onPasswordChange"
+              @blur="checkPasswordValue"
+            />
+          </van-cell-group>
+        </div>
+      </van-col>
+      <van-col span="18" offset="3">
+        <div class="button">
+          <van-button type="danger" size="large" @click="onSubmit">注册</van-button>
+          <div class="helper">
+            <div class="text-helper"></div>
+            <navigator class="text-helper" url="/pages/login/main">登录</navigator>
+          </div>
+        </div>
+      </van-col>
+    </van-row>
   </div>
 </template>
 
@@ -141,10 +155,35 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 320rpx;
+  color: white;
+  background-color: #f44;
+  font-size: 64rpx;
+}
+.panel {
+  position: relative;
+  top: -60rpx;
+  padding: 40rpx 40rpx 60rpx 40rpx;
+  box-shadow: 0 0 10px 1px rgb(173, 173, 173);
+  background-color: white;
+}
+.button {
+  position: relative;
+  top: -100rpx;
+}
+.helper {
+  display: flex;
+  justify-content: space-between;
+}
+
 .text-helper {
   display: inline-block;
-  padding: 12px;
-  color: rgb(102, 102, 102);
+  padding: 12px 0;
+  color: #f44;
   font-size: 14px;
 }
 </style>
