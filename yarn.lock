@@ -3106,7 +3106,7 @@ mpvue-webpack-target@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/mpvue-webpack-target/-/mpvue-webpack-target-1.0.1.tgz#203995b7ab63f1c80fb72acf870962c549fc43c7"
 
-mpvue@^1.0.11:
+mpvue@^1.0.13:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/mpvue/-/mpvue-1.0.13.tgz#9d128d91f2a89bdd7507493fbeef409fe302fbd7"
 
