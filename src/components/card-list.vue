@@ -10,10 +10,12 @@
       <div class="card__title">{{title}}</div>
       <div class="card__info">
         <Star v-if="star" :star="star"/>
-        <slot name="info"></slot>
+        <div style="color: #f44;">￥ {{value}}</div>
+        <div>已售 {{sold}}</div>>
       </div>
       <div class="crad__helper">
-        <slot name="helper"></slot>
+        <div>截止 {{limitDate}}</div>
+        <div>{{address}}</div>
       </div>
     </div>
   </div>
@@ -28,6 +30,10 @@ export default {
     'title',
     'star',
     'dark',
+    'value',
+    'sold',
+    'limitDate',
+    'address',
     'onClick'
   ],
   data() {
