@@ -19,17 +19,18 @@
         url="/pages/detail/main"
         :key="item"
       >
-        <van-card
-          title="原膳翔金鲳鱼340g"
-          desc="★★★★★ ￥32.50"
-          num="2"
-          price="2.00"
-          :thumb="item.url"
-        >
-          <view class="text-helper" slot="footer">
-            仓山万达广场5.9km
-          </view>
-        </van-card>
+        <Card
+          v-for="(item, key) in lists" :key="key"
+          :cover="item.cover"
+          :title="item.title"
+          :star="item.star"
+          :value="item.value"
+          :sold="item.sold"
+          :limitDate="item.limitDate"
+          :address="item.address"
+          :dark="false"
+          @onClick="handleCardClick(e, item.id)"
+        ></Card>
       </navigator>
     </scroll-view>
   </div>
@@ -43,6 +44,8 @@ const getNodeRectHeight = (nodeId, callback) => {
   wx.createSelectorQuery().select(nodeId).boundingClientRect(rect => callback(rect)).exec()
 }
 
+import Card from '@/components/card-list'
+
 export default {
   data () {
     return {
@@ -50,22 +53,67 @@ export default {
       tabsHeight: '',
 
       lists: [
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 1 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 2 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 3 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 4 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 5 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 6 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 7 },
+        {
+          id: 1,
+          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+          title: '原膳泰翔二去金昌鱼340kg',
+          star: 5,
+          value: 32.90,
+          sold: 5000,
+          limitDate: '2018-08-24',
+          daaress: '仓山万达广场5.9km'
+        },
+        {
+          id: 2,
+          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+          title: '原膳泰翔二去金昌鱼340kg',
+          star: 5,
+          value: 32.90,
+          sold: 5000,
+          limitDate: '2018-08-24',
+          daaress: '仓山万达广场5.9km'
+        },
+        {
+          id: 3,
+          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+          title: '原膳泰翔二去金昌鱼340kg',
+          star: 5,
+          value: 32.90,
+          sold: 5000,
+          limitDate: '2018-08-24',
+          daaress: '仓山万达广场5.9km'
+        },
+        {
+          id: 4,
+          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+          title: '原膳泰翔二去金昌鱼340kg',
+          star: 5,
+          value: 32.90,
+          sold: 5000,
+          limitDate: '2018-08-24',
+          daaress: '仓山万达广场5.9km'
+        },
+        {
+          id: 5,
+          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+          title: '原膳泰翔二去金昌鱼340kg',
+          star: 5,
+          value: 32.90,
+          sold: 5000,
+          limitDate: '2018-08-24',
+          daaress: '仓山万达广场5.9km'
+        }
       ]
     }
   },
 
   components: {
+    Card
   },
 
   computed: {
     scrollViewHeight() {
+      console.log(this.tabsHeight)
       return this.pageHeight - this.tabsHeight
     }
   },
@@ -77,9 +125,16 @@ export default {
         icon: 'none'
       })
       this.lists.push(
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 1 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 2 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 3 }
+        {
+          id: 6,
+          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+          title: '原膳泰翔二去金昌鱼340kg',
+          star: 5,
+          value: 32.90,
+          sold: 5000,
+          limitDate: '2018-08-24',
+          daaress: '仓山万达广场5.9km'
+        }
       )
     },
 
@@ -98,7 +153,9 @@ export default {
   onReady () {
     // set scroll-view height
     getPageHeight(height => this.pageHeight = height)
-    getNodeRectHeight('#tabs', rect => this.pickerHeight = rect.height)
+    getNodeRectHeight('#tabs', rect => {
+      this.tabsHeight = rect.height
+    })
   }
 }
 </script>
