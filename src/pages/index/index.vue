@@ -2,13 +2,15 @@
   <div class="container">
     <picker
       id="picker"
-      class="text-helper"
+      class="fix-picker"
       mode="region"
       :value="region"
       @change="onChangeRegion"
     >{{ region }}</picker>
+
     <swiper
       id="swiper"
+      class="fix-swiper"
       indicator-dots
       autoplay
       circular
@@ -24,37 +26,45 @@
       @scrolltolower="handleScrollToBottom"
       scroll-y
     >
-      <navigator
-        v-for="item in lists"
-        url="/pages/detail/main"
-        :key="item"
-      >
-        <van-card
-          title="原膳翔金鲳鱼340g"
-          desc="★★★★★ ￥32.50"
-          num="2"
-          price="2.00"
-          :thumb="item.url"
-        >
-        <view class="text-helper" slot="footer">
-          仓山万达广场5.9km
-        </view>
-      </van-card>
-      </navigator>
+
+      <Card
+        v-for="(item, key) in lists" :key="key"
+        :cover="item.cover"
+        :title="item.title"
+        :star="item.star"
+        :value="item.value"
+        :sold="item.sold"
+        :limitDate="item.limitDate"
+        :address="item.address"
+        :dark="false"
+        @onClick="handleCardClick(e, item.id)"
+      ></Card>
     </scroll-view>
   </div>
 </template>
 
 <script>
 const getPageHeight = callback => {
-  wx.getSystemInfo({success(res) {callback(res.windowHeight)}})
-}
+  wx.getSystemInfo({
+    success(res) {
+      callback(res.windowHeight);
+    }
+  });
+};
 const getNodeRectHeight = (nodeId, callback) => {
-  wx.createSelectorQuery().select(nodeId).boundingClientRect(rect => callback(rect)).exec()
-}
+  wx.createSelectorQuery()
+    .select(nodeId)
+    .boundingClientRect(rect => callback(rect))
+    .exec();
+};
+
+const QQMapWX = require("../../../static/qqmap/qqmap-wx-jssdk.min.js");
+
+import Card from "@/components/card-list";
+import Star from "@/components/star";
 
 export default {
-  data () {
+  data() {
     return {
       pageHeight: '',
       pickerHeight: '',
@@ -68,68 +78,124 @@ export default {
       ],
 
       lists: [
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 1 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 2 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 3 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 4 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 5 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 6 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 7 },
+        {
+          id: 1,
+          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+          title: '原膳泰翔二去金昌鱼340kg',
+          star: 5,
+          value: 32.90,
+          sold: 5000,
+          limitDate: '2018-08-24',
+          daaress: '仓山万达广场5.9km'
+        },
+        {
+          id: 2,
+          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+          title: '原膳泰翔二去金昌鱼340kg',
+          star: 5,
+          value: 32.90,
+          sold: 5000,
+          limitDate: '2018-08-24',
+          daaress: '仓山万达广场5.9km'
+        },
+        {
+          id: 3,
+          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+          title: '原膳泰翔二去金昌鱼340kg',
+          star: 5,
+          value: 32.90,
+          sold: 5000,
+          limitDate: '2018-08-24',
+          daaress: '仓山万达广场5.9km'
+        },
+        {
+          id: 4,
+          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+          title: '原膳泰翔二去金昌鱼340kg',
+          star: 5,
+          value: 32.90,
+          sold: 5000,
+          limitDate: '2018-08-24',
+          daaress: '仓山万达广场5.9km'
+        },
+        {
+          id: 5,
+          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+          title: '原膳泰翔二去金昌鱼340kg',
+          star: 5,
+          value: 32.90,
+          sold: 5000,
+          limitDate: '2018-08-24',
+          daaress: '仓山万达广场5.9km'
+        }
       ]
-    }
+    };
   },
 
   components: {
+    Card,
+    Star
   },
 
   computed: {
     scrollViewHeight() {
-      return this.pageHeight - this.pickerHeight - this.swiperHeight
+      return this.pageHeight - this.pickerHeight - this.swiperHeight - 22;
     }
   },
 
   methods: {
-
-    onChangeRegion (e) {
-      this.region = e.mp.detail.value[0]
+    onChangeRegion(e) {
+      this.region = e.mp.detail.value[0];
       // reload data
     },
 
-    handleScrollToBottom (e) {
+    handleScrollToBottom(e) {
       wx.showToast({
         title: `加载更多...`,
         icon: 'none'
-      })
+      });
       this.lists.push(
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 1 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 2 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 3 }
-      )
+        {
+          id: 6,
+          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+          title: '原膳泰翔二去金昌鱼340kg',
+          star: 5,
+          value: 32.90,
+          sold: 5000,
+          limitDate: '2018-08-24',
+          daaress: '仓山万达广场5.9km'
+        }
+      );
+    },
+
+    handleCardClick(e, id) {
+      wx.navigateTo({
+        url: '/pages/detail/main'
+      })
     }
   },
 
-  created () {
-  },
+  created() {},
 
-  onReady () {
+  onReady() {
     // set scroll-view height
-    getPageHeight(height => this.pageHeight = height)
-    getNodeRectHeight('#picker', rect => this.pickerHeight = rect.height)
-    getNodeRectHeight('#swiper', rect => this.swiperHeight = rect.height)
+    getPageHeight(height => (this.pageHeight = height));
+    getNodeRectHeight('#picker', rect => (this.pickerHeight = rect.height));
+    getNodeRectHeight('#swiper', rect => (this.swiperHeight = rect.height));
   }
-}
+};
 </script>
 
 <style scoped>
-.text-helper {
+.fix-picker {
   display: inline-block;
-  padding: 12px;
+  padding: 12px 12px 0 12px;
   color: rgb(102, 102, 102);
   font-size: 14px;
 }
 
-scroll-view {
-  height: 400px;
+.fix-swiper {
+  margin: 20rpx 0;
 }
 .swiper-image {
   width: 100vw;
