@@ -142,7 +142,7 @@ export default {
         // router jump
         setTimeout(()=>{
           wx.redirectTo({
-            url: '/pages/login/main'
+            url: '/pages/address/main'
           })
         }, 1000)
       }
