@@ -2,6 +2,7 @@
   "usingComponents": {
     "van-cell-group": "/static/vant/cell-group/index",
     "van-cell": "/static/vant/cell/index",
+    "van-submit-bar": "/static/vant/submit-bar/index",
     "van-button": "/static/vant/button/index",
     "van-card": "/static/vant/card/index",
     "van-stepper": "/static/vant/stepper/index"
