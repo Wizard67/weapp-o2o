@@ -19,15 +19,23 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
+    "color": "#dbdbdb",
+    "selectedColor": "#8a8a8a",
     "list": [{
+      "selectedIconPath": "static/icon/home-hover.png",
+      "iconPath": "static/icon/home.png",
       "pagePath": "pages/index/main",
       "text": "首页"
     },
     {
+      "selectedIconPath": "static/icon/block-hover.png",
+      "iconPath": "static/icon/block.png",
       "pagePath": "pages/recommend/main",
       "text": "推荐"
     },
     {
+      "selectedIconPath": "static/icon/user-hover.png",
+      "iconPath": "static/icon/user.png",
       "pagePath": "pages/user/main",
       "text": "个人中心"
     }]
