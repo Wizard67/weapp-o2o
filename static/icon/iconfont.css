@@ -7,11 +7,16 @@
   url('//at.alicdn.com/t/font_888351_m1x50uxw2ql.svg#iconfont') format('svg');
 }
 
-.iconfont {
+.iconfont,
+.iconfont--main {
   font-family: "iconfont";
   font-size: .16rem;
   font-style: normal;
   color: #8a8a8a;
+}
+
+.iconfont--main::before {
+  color: #FB2525 !important;
 }
 
 .icon-wallet:before { 
