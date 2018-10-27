@@ -56,6 +56,7 @@ export default {
   position: relative;
   display: flex;
   padding: 20rpx;
+  background-color: white;
 }
 .card--dark {
   background-color: #efeff4;
