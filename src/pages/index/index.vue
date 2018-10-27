@@ -86,7 +86,7 @@ export default {
           value: 32.90,
           sold: 5000,
           limitDate: '2018-08-24',
-          daaress: '仓山万达广场5.9km'
+          address: '仓山万达广场5.9km'
         },
         {
           id: 2,
@@ -96,7 +96,7 @@ export default {
           value: 32.90,
           sold: 5000,
           limitDate: '2018-08-24',
-          daaress: '仓山万达广场5.9km'
+          address: '仓山万达广场5.9km'
         },
         {
           id: 3,
@@ -106,7 +106,7 @@ export default {
           value: 32.90,
           sold: 5000,
           limitDate: '2018-08-24',
-          daaress: '仓山万达广场5.9km'
+          address: '仓山万达广场5.9km'
         },
         {
           id: 4,
@@ -116,7 +116,7 @@ export default {
           value: 32.90,
           sold: 5000,
           limitDate: '2018-08-24',
-          daaress: '仓山万达广场5.9km'
+          address: '仓山万达广场5.9km'
         },
         {
           id: 5,
@@ -126,7 +126,7 @@ export default {
           value: 32.90,
           sold: 5000,
           limitDate: '2018-08-24',
-          daaress: '仓山万达广场5.9km'
+          address: '仓山万达广场5.9km'
         }
       ]
     };
@@ -163,7 +163,7 @@ export default {
           value: 32.90,
           sold: 5000,
           limitDate: '2018-08-24',
-          daaress: '仓山万达广场5.9km'
+          address: '仓山万达广场5.9km'
         }
       );
     },
