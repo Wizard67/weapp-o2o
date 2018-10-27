@@ -11,7 +11,7 @@
       <div class="card__info">
         <Star v-if="star" :star="star"/>
         <div style="color: #f44;">￥ {{value}}</div>
-        <div>已售 {{sold}}</div>>
+        <div>已售 {{sold}}</div>
       </div>
       <div class="crad__helper">
         <div>截止 {{limitDate}}</div>
