@@ -3,5 +3,6 @@
     "van-button": "/static/vant/button/index",
     "van-card": "/static/vant/card/index"
   },
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "首页"
 }
