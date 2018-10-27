@@ -1,17 +1,18 @@
 <template>
   <div class="container">
-    <picker
-      id="picker"
-      class="fix-picker"
-      mode="region"
-      :value="region"
-      @change="onChangeRegion"
-    >{{ region }}</picker>
+    <div class="picker-wrap">
+      <picker
+        id="picker"
+        class="fix-picker"
+        mode="region"
+        :value="region"
+        @change="onChangeRegion"
+      >{{ region }}</picker>
+    </div>
 
     <swiper
       id="swiper"
       class="fix-swiper"
-      indicator-dots
       autoplay
       circular
     >
@@ -21,7 +22,7 @@
     </swiper>
 
     <scroll-view
-      :style="{height: scrollViewHeight+'px'}"
+      :style="{height: scrollViewHeight * 2 +'rpx'}"
       lower-threshold="50"
       @scrolltolower="handleScrollToBottom"
       scroll-y
@@ -61,7 +62,6 @@ const getNodeRectHeight = (nodeId, callback) => {
 const QQMapWX = require("../../../static/qqmap/qqmap-wx-jssdk.min.js");
 
 import Card from "@/components/card-list";
-import Star from "@/components/star";
 
 export default {
   data() {
@@ -133,13 +133,13 @@ export default {
   },
 
   components: {
-    Card,
-    Star
+    Card
   },
 
   computed: {
     scrollViewHeight() {
-      return this.pageHeight - this.pickerHeight - this.swiperHeight - 22;
+      console.log(this.swiperHeight)
+      return this.pageHeight - this.pickerHeight - this.swiperHeight - 10;
     }
   },
 
@@ -187,15 +187,31 @@ export default {
 </script>
 
 <style scoped>
+.picker-wrap {
+  background-color: white;
+}
 .fix-picker {
+  position: relative;
   display: inline-block;
-  padding: 12px 12px 0 12px;
+  padding: 24rpx;
   color: rgb(102, 102, 102);
+  background-color: white;
   font-size: 14px;
+}
+.fix-picker::after {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  width: 22.4rpx;
+  height: 11.2rpx;
+  content: "";
+  background-image: url(./arrow.png);
+  background-size: 100% 100%;
 }
 
 .fix-swiper {
-  margin: 20rpx 0;
+  margin-bottom: 20rpx;
 }
 .swiper-image {
   width: 100vw;
