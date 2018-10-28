@@ -27,7 +27,6 @@
       @scrolltolower="handleScrollToBottom"
       scroll-y
     >
-
       <Card
         v-for="(item, key) in lists" :key="key"
         :cover="item.cover"
@@ -61,6 +60,8 @@ const getNodeRectHeight = (nodeId, callback) => {
 
 const QQMapWX = require("../../../static/qqmap/qqmap-wx-jssdk.min.js");
 
+import { mockBannerData, mockListData } from './mock.js'
+
 import Card from "@/components/card-list";
 
 export default {
@@ -71,64 +72,8 @@ export default {
       swiperHeight: '',
 
       region: ['福州'],
-      banners: [
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 1 },
-        { url: 'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg', id: 2 },
-        { url: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg', id: 3 }
-      ],
-
-      lists: [
-        {
-          id: 1,
-          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          title: '原膳泰翔二去金昌鱼340kg',
-          star: 5,
-          value: 32.90,
-          sold: 5000,
-          limitDate: '2018-08-24',
-          address: '仓山万达广场5.9km'
-        },
-        {
-          id: 2,
-          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          title: '原膳泰翔二去金昌鱼340kg',
-          star: 5,
-          value: 32.90,
-          sold: 5000,
-          limitDate: '2018-08-24',
-          address: '仓山万达广场5.9km'
-        },
-        {
-          id: 3,
-          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          title: '原膳泰翔二去金昌鱼340kg',
-          star: 5,
-          value: 32.90,
-          sold: 5000,
-          limitDate: '2018-08-24',
-          address: '仓山万达广场5.9km'
-        },
-        {
-          id: 4,
-          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          title: '原膳泰翔二去金昌鱼340kg',
-          star: 5,
-          value: 32.90,
-          sold: 5000,
-          limitDate: '2018-08-24',
-          address: '仓山万达广场5.9km'
-        },
-        {
-          id: 5,
-          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          title: '原膳泰翔二去金昌鱼340kg',
-          star: 5,
-          value: 32.90,
-          sold: 5000,
-          limitDate: '2018-08-24',
-          address: '仓山万达广场5.9km'
-        }
-      ]
+      banners: [],
+      lists: []
     };
   },
 
@@ -138,7 +83,6 @@ export default {
 
   computed: {
     scrollViewHeight() {
-      console.log(this.swiperHeight)
       return this.pageHeight - this.pickerHeight - this.swiperHeight - 10;
     }
   },
@@ -154,18 +98,11 @@ export default {
         title: `加载更多...`,
         icon: 'none'
       });
-      this.lists.push(
-        {
-          id: 6,
-          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          title: '原膳泰翔二去金昌鱼340kg',
-          star: 5,
-          value: 32.90,
-          sold: 5000,
-          limitDate: '2018-08-24',
-          address: '仓山万达广场5.9km'
-        }
-      );
+
+      // get list data
+      setTimeout(() => {
+        this.lists.push(...mockListData)
+      }, 500)
     },
 
     handleCardClick(e, id) {
@@ -175,7 +112,22 @@ export default {
     }
   },
 
-  created() {},
+  created() {
+    // get user region
+    setTimeout(() => {
+      this.region = ['北京']
+    }, 500)
+
+    // get banner data
+    setTimeout(() => {
+      this.banners = mockBannerData
+    }, 500)
+
+    // get list data
+    setTimeout(() => {
+      this.lists = mockListData
+    }, 500)
+  },
 
   onReady() {
     // set scroll-view height
