@@ -1,13 +1,15 @@
 <template>
   <div class="container">
     <div class="user-card">
-      <image class="user-card__avatar" :src="avatar"/>
+      <image class="user-card__avatar" :src="user.avatar"/>
       <div class="user-card__info">
-        <div class="user-card__name">王五主流</div>
-        <div class="user-card__label">已认证</div>
+        <div class="user-card__name">{{ user.name }}</div>
+        <div class="user-card__label">
+          {{ user.hasCertification?'已认证': '未认证'}}
+        </div>
         <div class="user-card__helper">
-          <span>注册时间：2018-08-28</span>
-          <span style="margin-left: 20rpx;">仓山万达广场</span>
+          <span>注册时间：{{user.registTime}}</span>
+          <span style="margin-left: 20rpx;">{{ user.address }}</span>
         </div>
       </div>
     </div>
@@ -98,10 +100,12 @@
 </template>
 
 <script>
+import { mockUserData } from './mock.js'
+
 export default {
   data () {
     return {
-      avatar: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+      user: {}
     }
   },
 
@@ -113,6 +117,10 @@ export default {
   },
 
   created () {
+    // get list data
+    setTimeout(() => {
+      this.user = mockUserData
+    }, 500)
   }
 }
 </script>
@@ -150,6 +158,7 @@ export default {
 
 .panel {
   margin-top: 30rpx;
+  background-color: white;
 }
 
 .icon-group {
