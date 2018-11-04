@@ -5,11 +5,11 @@
         <view slot="title">
           <div class="address">
             <div class="address__header">
-              <div class="address__name">收货人：张三</div>
-              <div class="address__phone">15960123456</div>
+              <div class="address__name">收货人：{{ address.name }}</div>
+              <div class="address__phone">{{ address.phone }}</div>
             </div>
             <div class="address__body">
-              收货地址：北京市丰台区大红门街道珠江骏景北区65号楼1120室
+              收货地址：{{ address.address }}
             </div>
           </div>
         </view>
@@ -18,30 +18,31 @@
 
     <div class="panel">
       <van-cell-group>
-        <van-cell title="发起人：张三"></van-cell>
+        <van-cell :title="'发起人：' + order.sponsor"></van-cell>
         <van-card
-          title="山东水蜜桃1.2kg"
-          desc="￥ 26.80" 
-          num="1"
-          price="2.00"
-          :thumb="image"
+          :title="order.title"
+          :desc="order.desc" 
+          :num="order.number"
+          :price="order.price/100"
+          :thumb="order.thumbnail"
         >
         </van-card>
         <van-cell title="购买数量">
           <slot>
-            <van-stepper :value="1" @change="onStepperChange"/>
+            <van-stepper :value="order.number" :min="order.number" :max="order.number" disabled/>
           </slot>
         </van-cell>
-        <van-cell title="物流方式" value="快递免邮" is-link></van-cell>
-        <van-cell value="小计：￥ 26.80"></van-cell>
+        <van-cell title="物流方式" :value="order.transport" is-link></van-cell>
+        <van-cell :value="'小计：￥'+ (order.value/100)"></van-cell>
       </van-cell-group>
     </div>
 
     <view class="bottomBar">
       <van-submit-bar
-        :price="2680"
+        :loading="isLoading"
+        :price="order.value"
         button-text="提交订单"
-        @submit="showCard"
+        @submit="submitForm"
       >
       </van-submit-bar>
     </view>
@@ -49,11 +50,15 @@
 </template>
 
 <script>
+import { mockcommonAddressData, mockOrderData } from './mock.js'
+
 export default {
   data () {
     return {
-      isCardShow: false,
-      image: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'
+      isLoading: false,
+
+      address: {},
+      order: {}
     }
   },
 
@@ -64,19 +69,25 @@ export default {
   },
 
   methods: {
-    showCard () {
-      this.isCardShow = true
-    },
-    closeCard () {
-      this.isCardShow = false
-    },
-    onStepperChange () {
-
+    submitForm() {
+      this.isLoading = true
+      setTimeout(()=>{
+        this.isLoading = false
+      }, 3000)
     }
   },
 
   created () {
-  },
+    // get list data
+    setTimeout(() => {
+      this.address = mockcommonAddressData
+    }, 500)
+
+    // get list data
+    setTimeout(() => {
+      this.order = mockOrderData
+    }, 500)
+  }
 }
 </script>
 
