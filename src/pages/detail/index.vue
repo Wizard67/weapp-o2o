@@ -1,24 +1,27 @@
 <template>
   <div class="container">
     <view class="detail">
-      <image class="detail__cover" src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg" />
+      <image class="detail__cover" :src="data.cover" />
       <div class="detail__main">
-        <div class="detail__title">山东水蜜桃1.2kg200g以上/个山东水蜜桃1.2kg200g以上/个</div>
+        <div class="detail__title">{{ data.title }}</div>
         <div class="detail__summary">
-          <div class="detail__value">¥26.80<span class="detail__count">库存：1000</span></div>
-          <div class="detail__views">10000</div>
+          <div class="detail__value">¥{{ data.price/100 }}<span class="detail__count">库存：{{ data.count }}</span></div>
+          <div class="detail__views">浏览：{{ data.views }}</div>
         </div>
-        <div class="detail__helper">截止时间：2018-08-31   12:00:00</div>
+        <div class="detail__helper">截止时间：{{ data.limitDate }}</div>
       </div>
     </view>
 
     <div class="panel">
       <van-cell-group>
-        <van-cell title="发起人：王五"/>
+        <!-- mpvue 用不了模板字符串语法... -->
+        <van-cell :title="'发起人：' + data.sponsor"/>
       </van-cell-group>
     </div>
 
-    <image class="detail__image" src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg" />
+    <template v-for="(item, key) in data.pictures">
+      <image class="detail__image" :src="item" :key="key"/>
+    </template>
 
     <view class="bottomBar">
       <van-submit-bar
@@ -40,20 +43,20 @@
     >
       <view class="card">
         <div class="card__summary">
-          <image class="card__cover" src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"/>
+          <image class="card__cover" :src="data.thumbnail"/>
           <div class="card__info">
-            <div class="card__value">¥26.80</div>
-            <span class="card__count">库存：1000</span>
+            <div class="card__value">¥{{ data.price/100 }}</div>
+            <span class="card__count">库存：{{ data.conut }}</span>
           </div>
         </div>
         <van-cell-group>
           <van-cell title="购买数量">
             <slot>
-              <van-stepper :value="1" @change="onStepperChange"/>
+              <van-stepper :value="1" :max="data.count" @change="onStepperChange"/>
             </slot>
           </van-cell>
           <van-cell title="物流方式" is-link value="快递免邮" />
-          <van-cell value="小计 ￥200" />
+          <van-cell :value="'小计 ￥' + value" />
         </van-cell-group>
         <navigator url="/pages/order/main">
           <van-button type="danger" block>确定</van-button>
@@ -64,10 +67,14 @@
 </template>
 
 <script>
+import { mockDetailData } from './mock.js'
+
 export default {
   data () {
     return {
-      isCardShow: false
+      isCardShow: false,
+      data: {},
+      number : 1
     }
   },
 
@@ -75,6 +82,10 @@ export default {
   },
 
   computed: {
+    value () {
+      const price =  this.data.price || 0
+      return (price * this.number)/100
+    }
   },
 
   methods: {
@@ -84,12 +95,16 @@ export default {
     closeCard () {
       this.isCardShow = false
     },
-    onStepperChange () {
-
+    onStepperChange (e) {
+      this.number = e.mp.detail
     }
   },
 
   created () {
+    // get list data
+    setTimeout(() => {
+      this.data = mockDetailData
+    }, 500)
   },
 }
 </script>
@@ -102,6 +117,7 @@ export default {
 }
 .detail__main {
   padding: 20rpx;
+  background-color: white;
 }
 .detail__title {
   font-size: 36rpx;
