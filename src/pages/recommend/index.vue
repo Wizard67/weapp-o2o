@@ -1,12 +1,14 @@
 <template>
   <div class="container">
-    <van-tabs id="tabs" :active="0" @change="onTabsChange">
-      <van-tab title="热门"></van-tab>
-      <van-tab title="水果"></van-tab>
-      <van-tab title="土特产"></van-tab>
-      <van-tab title="生鲜"></van-tab>
-      <van-tab title="票务"></van-tab>
-    </van-tabs>
+    <div class="tabs-wrap" id="tabs">
+      <van-tabs :active="0" @change="onTabsChange">
+        <van-tab title="热门"></van-tab>
+        <van-tab title="水果"></van-tab>
+        <van-tab title="土特产"></van-tab>
+        <van-tab title="生鲜"></van-tab>
+        <van-tab title="票务"></van-tab>
+      </van-tabs>
+    </div>
 
     <scroll-view
       :style="{height: scrollViewHeight+'px'}"
@@ -44,6 +46,8 @@ const getNodeRectHeight = (nodeId, callback) => {
   wx.createSelectorQuery().select(nodeId).boundingClientRect(rect => callback(rect)).exec()
 }
 
+import { mockListData } from './mock.js'
+
 import Card from '@/components/card-list'
 
 export default {
@@ -52,58 +56,8 @@ export default {
       pageHeight: '',
       tabsHeight: '',
 
-      lists: [
-        {
-          id: 1,
-          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          title: '原膳泰翔二去金昌鱼340kg',
-          star: 5,
-          value: 32.90,
-          sold: 5000,
-          limitDate: '2018-08-24',
-          daaress: '仓山万达广场5.9km'
-        },
-        {
-          id: 2,
-          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          title: '原膳泰翔二去金昌鱼340kg',
-          star: 5,
-          value: 32.90,
-          sold: 5000,
-          limitDate: '2018-08-24',
-          daaress: '仓山万达广场5.9km'
-        },
-        {
-          id: 3,
-          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          title: '原膳泰翔二去金昌鱼340kg',
-          star: 5,
-          value: 32.90,
-          sold: 5000,
-          limitDate: '2018-08-24',
-          daaress: '仓山万达广场5.9km'
-        },
-        {
-          id: 4,
-          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          title: '原膳泰翔二去金昌鱼340kg',
-          star: 5,
-          value: 32.90,
-          sold: 5000,
-          limitDate: '2018-08-24',
-          daaress: '仓山万达广场5.9km'
-        },
-        {
-          id: 5,
-          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          title: '原膳泰翔二去金昌鱼340kg',
-          star: 5,
-          value: 32.90,
-          sold: 5000,
-          limitDate: '2018-08-24',
-          daaress: '仓山万达广场5.9km'
-        }
-      ]
+      active: 0,
+      lists: []
     }
   },
 
@@ -124,18 +78,11 @@ export default {
         title: `加载更多...`,
         icon: 'none'
       })
-      this.lists.push(
-        {
-          id: 6,
-          cover: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          title: '原膳泰翔二去金昌鱼340kg',
-          star: 5,
-          value: 32.90,
-          sold: 5000,
-          limitDate: '2018-08-24',
-          daaress: '仓山万达广场5.9km'
-        }
-      )
+
+      // get list data
+      setTimeout(() => {
+        this.lists.push(...mockListData)
+      }, 500)
     },
 
     onTabsChange(e) {
@@ -147,7 +94,11 @@ export default {
     }
   },
 
-  created () {
+  created() {
+    // get list data
+    setTimeout(() => {
+      this.lists = mockListData
+    }, 500)
   },
 
   onReady () {
@@ -161,6 +112,10 @@ export default {
 </script>
 
 <style scoped>
+.tabs-wrap {
+  margin-bottom: 20rpx;
+}
+
 scroll-view {
   height: 450px;
 }
